@@ -14,6 +14,9 @@ import ViewCart from "../Screens/ViewCart";
 import Payment from "../Screens/Payment";
 import Paystack from "../Screens/Paystack"
 import Summary from "../Screens/Summary";
+import Map from "../Components/Map"
+import ChooseLocation from "../Components/ChooseLocation";
+// import MapLocation from "../Components/MapLocation"
 
 
 
@@ -40,6 +43,9 @@ const StackNav = () => {
       <Stack.Screen name="payment" component={Payment} />
       <Stack.Screen name="summary" component={Summary} />
       <Stack.Screen name="paystack" component={Paystack} />
+      <Stack.Screen name="map" component={Map} />
+      <Stack.Screen name="chooselocation" component={ChooseLocation} />
+      
       
     </Stack.Navigator>
   );

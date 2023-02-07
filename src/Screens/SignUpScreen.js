@@ -1,79 +1,90 @@
-import { Box, Heading, Center, Form, FormControl, Input, Button, Text,  Pressable } from 'native-base'
 import React, {useState} from 'react'
+import {Button, FormControl, Input, Box, VStack, Text} from 'native-base'
+
+function SignUpScreen () {
+  const [values, setValues] = useState({
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
+
+  
+
+  // const validate = () => {
+  //   if (values.name === undefined) {
+  //     setErrors({ ...errors,
+  //       name: 'Name is required'
+  //     });
+  //     return false;
+  //   } else if (values.name.length < 3) {
+  //     setErrors({ ...errors,
+  //       name: 'Name is too short'
+  //     });
+  //     return false;
+  //   }
+
+  //   return true;
+  // };
+
+  const onSubmit = (e) => {
+    e.PreventDefault
+    var formdata = new FormData();
+    formdata.append("name", "Esther Sad");
+    formdata.append("email", "john.smith@gmail.com");
+    formdata.append("password", "sd232325");
+    formdata.append("password_confirmation", "sd232325");
+    formdata.append("roles_id", "1");
 
 
+fetch("https://niqsolution.com/api/auth/register", {
+  method: 'POST',
+  body: formdata,
+  redirect: 'follow'
+})
+.then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));}
+  
 
-const SignUpScreen = ({navigation}) => {
+  return (
+  <Box>
+    <VStack width="90%" mx="3" maxW="300px">
+      <FormControl isRequired >
+        <FormControl.Label _text={{
+        bold: true}}>
+          Username
+        </FormControl.Label>
+      <Input type="text" placeholder="username" value={values.username} onChangeText={text => setValues(text)} />
 
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    password:"",
-    confirmpassword:""
-  })
+        <FormControl.Label _text={{
+        bold: true}}>
+          Email Address
+        </FormControl.Label>
+        <Input type="email" placeholder="email" value={values.email} onChangeText={text => setValues(text)} />
+        
+        <FormControl.Label _text={{
+        bold: true}}>
+          Password
+        </FormControl.Label>
+        <Input type="password" placeholder="password" value={values.password} onChangeText={text => setValues(text)} />
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log(user)
+        <FormControl.Label _text={{
+        bold: true}}>
+          Confirm Password
+        </FormControl.Label>
+        <Input type="password" placeholder="confirm password" value={values.confirmPassword} onChangeText={text => setValues(text)} />
 
+        
+      </FormControl>
+      
+      
+      
+    </VStack>;
+    <Button onPress={onSubmit} mt="5" colorScheme="cyan">
+        Submit
+      </Button>
+    </Box>)
 }
 
-  return <Center w="100%">
-      <Box safeArea p="2" w="90%" maxW="290" py="8">
-        <Heading size="lg" color="coolGray.800" _dark={{
-        color: "warmGray.50"
-      }} fontWeight="semibold">
-          Welcome
-        </Heading>
-        <Heading mt="1" color="coolGray.600" _dark={{
-        color: "warmGray.200"
-      }} fontWeight="medium" size="xs">
-          Sign up to continue!
-        </Heading>
-
-        <Form space={3} mt="5">
-
-        <FormControl>          
-            <FormControl.Label>Name</FormControl.Label>
-            <Input type="text" value={user.name} onChange={(e) => setUser({...user, name:e.target.value})}/>
-        
-          {/* // onChange​={(e) => setFormData({...formData, title: e.target.value})} */}
-                
-            <FormControl.Label>Email</FormControl.Label>
-            <Input type="text" value={user.email} onChange={(e) => setUser({...user, email:e.target.value})}/>
-         
-        
-            <FormControl.Label>Password</FormControl.Label>
-            <Input type="password" value={user.password} onChange={(e) => setUser({...user, password:e.target.value})}/>
-        
-        
-            <FormControl.Label>Confirm Password</FormControl.Label>
-            <Input type="password" value={user.confirmpassword} onChange={(e) => setUser({...user, confirmpassword:e.target.value})}/>
-          
-          <Button 
-              // onPress={() => navigation.navigate("bottom")}
-              type="submit"
-              onSubmit={handleSubmit}
-              mt="2" 
-              bg="cyan.500"   
-              _text={{
-                    color: "white",
-                    fontWeight: '600'
-                  }}>
-            Sign up
-          </Button>
-          
-        </FormControl>       
-        </Form>
-
-        <Pressable onPress={() => navigation.navigate("signin")}>
-              
-                <Text >
-                  Back to <Text color= "indigo.500">Sign in</Text>
-                </Text>
-              </Pressable>
-      </Box>
-    </Center>;
-};
-
-export default SignUpScreen;
+export default SignUpScreen

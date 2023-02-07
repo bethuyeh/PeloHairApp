@@ -45,6 +45,7 @@ const SaloonScreen = () => {
       }
 
       </ScrollView>
+      <Button onPress={() => navigation.navigate("map")}>View Distance Location</Button>
       </Box>
   )
 }

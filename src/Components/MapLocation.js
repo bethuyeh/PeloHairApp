@@ -1,7 +1,15 @@
-import { Box, Text } from 'native-base'
-import React from 'react'
+import { Box, Text, Button } from 'native-base'
+import { Dimensions } from 'react-native'
+import React, {useState, useEffect, useRef} from 'react'
+import * as TaskManager from 'expo-task-manager'
+import * as Location from "expo-location"
 
-const LOCATION_TASK_NAME = "LOCATION_TASK_NAME"
+
+
+const MapLocation = () => {
+
+
+  const LOCATION_TASK_NAME = "LOCATION_TASK_NAME"
 let foregroundSubscription = null
 
 // Define the background task for location tracking
@@ -111,21 +119,23 @@ const [position, setPosition] = useState(null)
     }
   }
 
-const MapLocation = () => {
   return (
     <Box flex={1} mt={3} justifyContent='center' alignContent="center">
       <Text>Longitude: {position?.longitude}</Text>
       <Text>Latitude: {position?.latitude}</Text>
 
-      <Box>
+
+
+      <Box mt={3}>
         <Button
             onPress={startForegroundUpdate}
             title="Start in foreground"
             color="green"
         />
       </Box>
+      <Text >8.997173192577819, 7.488480287568808</Text>
 
-      <Box>
+      <Box mt={3}>
        <Button
         onPress={stopForegroundUpdate}
         title="Stop in foreground"
@@ -133,16 +143,18 @@ const MapLocation = () => {
        />
       </Box>
 
-      <Box>
+      <Box mt={3}>
       <Button
         onPress={startBackgroundUpdate}
         title="Start in background"
         color="green"
       />
+      
       </Box>
 
-      <Box>
+      <Box mt={3}>
       <Button
+      h={10}
         onPress={stopBackgroundUpdate}
         title="Stop in foreground"
         color="red"
